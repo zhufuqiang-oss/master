@@ -1,0 +1,32 @@
+10.8.117.201
+C:\Windows\system32>adb devices
+List of devices attached
+1d3068c8        device
+
+
+C:\Windows\system32>adb tcpip 5555
+restarting in TCP mode port: 5555
+
+C:\Windows\system32>adb shell ip -f inet addr show wlan0
+29: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 3000
+    inet 10.8.117.201/23 brd 10.8.117.255 scope global wlan0
+       valid_lft forever preferred_lft forever
+import time
+import unittest
+import ddt
+from webUtil import WebDriverUtil
+from public投保 import public_tou_bao as AC
+
+
+@ddt.ddt
+class Test(unittest.TestCase):
+
+    @ddt.file_data("data\data鑫康.json")
+    def test_01(self, data) -> None:
+        self.driver = AC(data["登录"])
+        self.driver.login()
+        self.driver.投被保人信息()
+
+
+if __name__ == '__main__':
+    unittest.main()
